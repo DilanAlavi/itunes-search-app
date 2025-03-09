@@ -9,12 +9,14 @@ function App() {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false); 
 
   const handleSearch = async (term, mediaType) => {
     if (!term.trim()) return;
 
     setIsLoading(true);
     setError(null);
+    setHasSearched(true); 
 
     try {
       const data = await searchITunes(term, mediaType);
@@ -40,7 +42,7 @@ function App() {
             ))}
           </div>
         ) : (
-          !isLoading && <p className="no-results">No results found. Please try a different search term.</p>
+          hasSearched && !isLoading && <p className="no-results">No results found. Please try a different search term.</p>
         )}
       </div>
     </AppLayout>
