@@ -25,5 +25,15 @@ describe('ResultCard Component', () => {
 
     expect(screen.getByText('$9.99')).toBeInTheDocument();
   });
+  test('renders with fallback for unknown title', () => {
+    const mockItem = {
+      artworkUrl100: 'https://itunes.com/imagen.jpg',
+      artistName: 'Test Artist'
+    };
+    
+    render(<ResultCard item={mockItem} />);
+    expect(screen.getByText('Unknown')).toBeInTheDocument();
+  });
+  
 
 });
