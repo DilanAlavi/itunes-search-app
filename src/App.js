@@ -8,17 +8,20 @@ import './App.css';
 function App() {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSearch = async (term, mediaType) => {
     if (!term.trim()) return;
 
     setIsLoading(true);
+    setError(null);
 
     try {
       const data = await searchITunes(term, mediaType);
       setResults(data);
     } catch (error) {
       console.error('Search error:', error);
+      setError(`Error fetching data: ${error.message}. Please try again later.`);
     } finally {
       setIsLoading(false);
     }
@@ -28,6 +31,7 @@ function App() {
     <AppLayout>
       <SearchBar onSearch={handleSearch} />
       {isLoading && <div className="loading">Loading...</div>}
+      {error && <div className="error">{error}</div>}
       <div className="results-container">
         {results.length > 0 && (
           <div className="results-grid">
