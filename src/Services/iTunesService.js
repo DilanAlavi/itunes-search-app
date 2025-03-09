@@ -21,8 +21,12 @@ export const jsonpRequest = (url) => {
     });
   };
 
-  export const searchITunes = async (term) => {
-    const apiUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&limit=20`;
+export const searchITunes = async (term, mediaType) => {
+    let apiUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&limit=20`;
+    if (mediaType !== 'all') {
+      apiUrl += `&media=${mediaType}`;
+    }
+  
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data.results;
