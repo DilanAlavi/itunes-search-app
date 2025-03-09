@@ -7,21 +7,27 @@ import './App.css';
 
 function App() {
   const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async (term, mediaType) => {
     if (!term.trim()) return;
+
+    setIsLoading(true);
 
     try {
       const data = await searchITunes(term, mediaType);
       setResults(data);
     } catch (error) {
       console.error('Search error:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <AppLayout>
       <SearchBar onSearch={handleSearch} />
+      {isLoading && <div className="loading">Loading...</div>}
       <div className="results-container">
         {results.length > 0 && (
           <div className="results-grid">
