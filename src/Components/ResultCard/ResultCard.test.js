@@ -1,0 +1,29 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import ResultCard from './ResultCard';
+
+describe('ResultCard Component', () => {
+  test('renders with full item data', () => {
+    const mockItem = {
+      artworkUrl100: 'https://itunes.com/imagen.jpg',
+      collectionName: 'Test Album',
+      trackName: 'Test Track',
+      artistName: 'Test Artist',
+      collectionPrice: 9.99
+    };
+    
+    render(<ResultCard item={mockItem} />);
+
+    const image = screen.getByAltText('Test Album');
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute('src', 'https://itunes.com/imagen.jpg');
+    
+    expect(screen.getByText('Test Album')).toBeInTheDocument();
+
+    expect(screen.getByText('Test Artist')).toBeInTheDocument();
+
+    expect(screen.getByText('$9.99')).toBeInTheDocument();
+  });
+
+});
