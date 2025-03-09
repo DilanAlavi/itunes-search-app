@@ -20,3 +20,10 @@ export const jsonpRequest = (url) => {
       document.body.appendChild(script);
     });
   };
+
+  export const searchITunes = async (term) => {
+    const apiUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&limit=20`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    return data.results;
+  };
