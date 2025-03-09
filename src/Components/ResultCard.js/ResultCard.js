@@ -8,6 +8,7 @@ const ResultCard = ({ item }) => {
         <img
           src={item.artworkUrl100 || '/default-album.png'}
           alt={item.collectionName || item.trackName || 'Album Cover'}
+          onError={(e) => { e.target.onerror = null; e.target.src = '/default-album.png' }}
         />
       </div>
       <div className="card-content">
