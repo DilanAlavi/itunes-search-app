@@ -6,9 +6,9 @@ const ResultCard = ({ item }) => {
     <div className="result-card">
       <div className="card-image">
         <img
-          src={item.artworkUrl100 || '/default-album.png'}
+          src={item.artworkUrl100 || '/images/default-album.png'}
           alt={item.collectionName || item.trackName || 'Album Cover'}
-          onError={(e) => { e.target.onerror = null; e.target.src = '/default-album.png' }}
+          onError={(e) => { e.target.onerror = null; e.target.src = '/images/default-album.png' }}
         />
       </div>
       <div className="card-content">
