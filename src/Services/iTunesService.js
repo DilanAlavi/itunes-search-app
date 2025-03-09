@@ -6,6 +6,8 @@ export const jsonpRequest = (url) => {
       script.src = fullUrl;
   
       window[callbackName] = (data) => {
+        document.body.removeChild(script);
+        delete window[callbackName];
         resolve(data);
       };
   
