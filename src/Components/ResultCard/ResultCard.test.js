@@ -54,6 +54,18 @@ describe('ResultCard Component', () => {
     const priceElement = screen.queryByText(/\$/);
     expect(priceElement).not.toBeInTheDocument();
   });
+  test('uses default image when artwork URL is not provided', () => {
+    const mockItem = {
+      collectionName: 'Test Album',
+      artistName: 'Test Artist'
+    };
+    
+    render(<ResultCard item={mockItem} />);
+    
+    const image = screen.getByAltText('Test Album');
+    expect(image).toHaveAttribute('src', '/images/default-album.png');
+  });
+  
   
   
 
