@@ -34,6 +34,15 @@ describe('ResultCard Component', () => {
     render(<ResultCard item={mockItem} />);
     expect(screen.getByText('Unknown')).toBeInTheDocument();
   });
+  test('renders with fallback for unknown artist', () => {
+    const mockItem = {
+      artworkUrl100: 'https://itunes.com/imagen.jpg',
+      collectionName: 'Test Album'
+    };
+    
+    render(<ResultCard item={mockItem} />);
+    expect(screen.getByText('Unknown Artist')).toBeInTheDocument();
+  });
   
 
 });
