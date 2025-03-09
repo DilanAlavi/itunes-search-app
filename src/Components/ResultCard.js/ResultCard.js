@@ -14,6 +14,9 @@ const ResultCard = ({ item }) => {
       <div className="card-content">
         <h3>{item.collectionName || item.trackName || 'Unknown'}</h3>
         <p className="artist-name">{item.artistName || 'Unknown Artist'}</p>
+        {item.collectionPrice && (
+          <p className="price">${item.collectionPrice.toFixed(2)}</p>
+        )}
       </div>
     </div>
   );
