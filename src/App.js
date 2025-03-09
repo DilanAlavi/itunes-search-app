@@ -33,12 +33,14 @@ function App() {
       {isLoading && <div className="loading">Loading...</div>}
       {error && <div className="error">{error}</div>}
       <div className="results-container">
-        {results.length > 0 && (
+        {results.length > 0 ? (
           <div className="results-grid">
             {results.map((item, index) => (
               <ResultCard key={item.trackId || item.collectionId || item.artistId || index} item={item} />
             ))}
           </div>
+        ) : (
+          !isLoading && <p className="no-results">No results found. Please try a different search term.</p>
         )}
       </div>
     </AppLayout>
