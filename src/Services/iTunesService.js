@@ -21,13 +21,18 @@ export const jsonpRequest = (url) => {
     });
   };
 
-export const searchITunes = async (term, mediaType) => {
+  export const searchITunes = async (term, mediaType) => {
     let apiUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&limit=20`;
     if (mediaType !== 'all') {
       apiUrl += `&media=${mediaType}`;
     }
   
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    return data.results;
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      return data.results;
+    } catch (error) {
+      console.log("Direct request error:", error);
+      throw error;
+    }
   };
