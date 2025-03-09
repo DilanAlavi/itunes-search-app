@@ -43,6 +43,18 @@ describe('ResultCard Component', () => {
     render(<ResultCard item={mockItem} />);
     expect(screen.getByText('Unknown Artist')).toBeInTheDocument();
   });
+  test('does not display price when not available', () => {
+    const mockItem = {
+      artworkUrl100: 'https://itunes.com/imagen.jpg',
+      collectionName: 'Test Album',
+      artistName: 'Test Artist'
+    };
+    
+    render(<ResultCard item={mockItem} />);
+    const priceElement = screen.queryByText(/\$/);
+    expect(priceElement).not.toBeInTheDocument();
+  });
+  
   
 
 });
