@@ -1,5 +1,5 @@
 export const jsonpRequest = (url) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
       const fullUrl = `${url}&callback=${callbackName}`;
       const script = document.createElement('script');
@@ -9,6 +9,12 @@ export const jsonpRequest = (url) => {
         document.body.removeChild(script);
         delete window[callbackName];
         resolve(data);
+      };
+  
+      script.onerror = () => {
+        document.body.removeChild(script);
+        delete window[callbackName];
+        reject(new Error('JSONP request error'));
       };
   
       document.body.appendChild(script);
